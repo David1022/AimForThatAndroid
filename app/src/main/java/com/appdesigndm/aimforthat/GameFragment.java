@@ -1,6 +1,8 @@
 package com.appdesigndm.aimforthat;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,6 +42,8 @@ public class GameFragment extends Fragment {
     private Integer mScore = 0;
     private Integer mRound = 0;
 
+    private String title;
+    private Float points;
 
     public GameFragment() {
         // Required empty public constructor
@@ -51,7 +55,7 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
-        ButterKnife.bind(view);
+        ButterKnife.bind(this, view);
 
         setupSlider();
         resetGame();
@@ -81,17 +85,28 @@ public class GameFragment extends Fragment {
     }
 
     @OnClick(R.id.hitMeButton)
-    private void showAlert() {
+    public void showAlert() {
         updateValues();
 
         //TODO: Mostrar la alerta
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(title)
+                .setMessage("Has ganado " + Math.round(points) + " puntos")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startNewRound();
+                        updateTexts();
+                    }
+                })
+                .create()
+                .show();
     }
 
     private void updateValues() {
         Integer difference = Math.abs(mCurrentValue - mTargetValue);
-        Float points = 100.0f - difference;
+        points = 100.0f - difference;
 
-        String title;
         switch (difference) {
             case 0:
                 title = "Perfecto!!!";
@@ -128,13 +143,15 @@ public class GameFragment extends Fragment {
         mRoundText.setText(mRound.toString());
     }
 
-    private void startNewGame() {
+    @OnClick(R.id.restart)
+    public void startNewGame() {
         resetGame();
         updateTexts();
     }
 
     private void startNewRound() {
         mCurrentValue = INITIAL_VALUE;
+        mSeekBar.setProgress(INITIAL_VALUE);
         mTargetValue = getNewRandomValue();
         mRound++;
     }

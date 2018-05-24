@@ -37,14 +37,14 @@
         app:layout_constraintTop_toBottomOf="@+id/restart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/seekbar">
+        app:layout_constraintBottom_toTopOf="@+id/linear_seekbar">
 
         <TextView
             android:id="@+id/target_title"
-            style="@style/AppText"
+            style="@style/AppText.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Tu objetivo es acertar el número:"/>
+            android:text="Tu objetivo es acertar el número:"/>
 
         <TextView
             android:id="@+id/target_text"
@@ -56,19 +56,44 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatSeekBar
-        android:id="@+id/seekbar"
+    <LinearLayout
+        android:id="@+id/linear_seekbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:min="1"
-        android:max="100"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/target_linear"
-        app:layout_constraintBottom_toTopOf="@+id/hitMeButton"/>
+        app:layout_constraintBottom_toTopOf="@+id/hitMeButton">
+
+        <TextView
+            style="@style/AppText.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="end"
+            android:text="1"/>
+
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="90"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:min="1"
+            android:max="100"/>
+
+        <TextView
+            style="@style/AppText.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="start"
+            android:text="100"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/hitMeButton"
@@ -76,11 +101,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Pulsa aquí
+        android:text="Pulsa aquí"
         android:background="@drawable/button_normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seekbar"
+        app:layout_constraintTop_toBottomOf="@id/linear_seekbar"
         app:layout_constraintBottom_toTopOf="@+id/score_linear"/>
 
     <LinearLayout
@@ -94,10 +119,10 @@
 
         <TextView
             android:id="@+id/score_title"
-            style="@style/AppText"
+            style="@style/AppText.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Puntuación:"/>
+            android:text="Puntuación:"/>
 
         <TextView
             android:id="@+id/score_text"
@@ -121,10 +146,10 @@
 
         <TextView
             android:id="@+id/round_title"
-            style="@style/AppText"
+            style="@style/AppText.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Ronda:"/>
+            android:text="Ronda:"/>
 
         <TextView
             android:id="@+id/round_text"
