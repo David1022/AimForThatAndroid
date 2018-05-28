@@ -88,7 +88,6 @@ public class GameFragment extends Fragment {
     public void showAlert() {
         updateValues();
 
-        //TODO: Mostrar la alerta
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(title)
                 .setMessage("Has ganado " + Math.round(points) + " puntos")
